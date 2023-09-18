@@ -8,6 +8,6 @@ Its is prepared with the help of API.
 3.Clicking on logo will reload the page.
 
 ## Technology Used:
-  1:HTML
-  2:CSS
-  3:JavaScript(API call)
+1:HTML
+2:CSS
+3:JavaScript(API call)
