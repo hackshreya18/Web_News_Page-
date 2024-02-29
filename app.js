@@ -1,17 +1,29 @@
 const apiKey="5ff3376ec3744f19a604958f539cac96";
 const url="https://newsapi.org/v2/everything?q=";
 
-window.addEventListener("load",fetchNews("Current Affairs"));
+(function(){
+    window.addEventListener("load",fetchNews("Current Affairs"));
+});
+
 
 function reload(){
     window.location.reload();
 }
 
 async function fetchNews(query){
-    const res=await fetch(`${url}${query}&apiKey=${apiKey}`);
-    const data=await res.json();
-    console.log(data);
-    bindingData(data.articles);
+    try{
+        const res=await fetch(`${url}${query}&apiKey=${apiKey}`);
+        if(!res.ok){
+            throw new Error('Network response was not ok');
+        }
+        const data=await res.json();
+        console.log(data);
+        bindingData(data.articles);
+    }
+    catch(error){
+        console.error('Error fetching news:', error);
+    }
+    
 }
 
 function bindingData(cardArticle){
@@ -64,14 +76,15 @@ function openData(){
 const searchData=document.querySelector(".search_btn");
 const inputData=document.querySelector(".news_input");
 
-searchData.addEventListener("click",toSearch);
-
-function toSearch(){
+searchData.addEventListener("click",()=>{
     if(inputData.value){
         fetchNews(inputData.value);
     }
     else{
         return;
     }
-}
+});
+
+
+
 
