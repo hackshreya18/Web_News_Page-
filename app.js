@@ -4,8 +4,6 @@ const url="https://newsapi.org/v2/everything?q=";
 
 window.addEventListener("load",fetchNews("Humanity"));
 
-
-
 function reload(){
     window.location.reload();
 }
