@@ -8,18 +8,18 @@ function reload(){
 }
 
 async function fetchNews(query){
-    try{
+    // try{
         const res=await fetch(`${url}${query}&apiKey=${apiKey}`);
-        if(!res.ok){
-            throw new Error('Network response was not ok');
-        }
+        // if(!res.ok){
+        //     throw new Error('Network response was not ok');
+        // }
         const data=await res.json();
         console.log(data);
         bindingData(data.articles);
-    }
-    catch(error){
-        console.error('Error fetching news:', error);
-    }
+    // }
+    // catch(error){
+    //     console.error('Error fetching news:', error);
+    // }
     
 }
 
