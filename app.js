@@ -1,17 +1,19 @@
-const API_KEY="5ff3376ec3744f19a604958f539cac96";
-const url="https://newsapi.org/v2/everything?q=";
+// const API_KEY="5ff3376ec3744f19a604958f539cac96";
+// const url="https://newsapi.org/v2/everything?q=";
 
-window.addEventListener("DOMContentLoaded",()=>fetchNews("Humanity"));
+const url="https://newsdata.io/api/1/news?apikey=pub_45290c4a5b1d1c9e14d145ca383521940131e&q="
+
+window.addEventListener("load",()=>fetchNews("Humanity"));
 
 function reload(){
     window.location.reload();
 }
 
 async function fetchNews(query){
-        const res=await fetch(`${url}${query}&apiKey=${API_KEY}`);
+        const res=await fetch(`${url}${query}`);
         const data=await res.json();
         console.log(data);
-        bindingData(data.articles);
+        bindingData(data.results);
     
     
 }
@@ -22,8 +24,10 @@ function bindingData(cardArticle){
 
     cardData.innerText="";
 
-    cardArticle.forEach((element) => {
-        if(!element.urlToImage){
+    if (!cardArticle || !Array.isArray(cardArticle)) return;
+
+    cardArticle.forEach(element => {
+        if(!element.image_url){
             return;
         }
         const cloneCard=templateData.content.cloneNode(true);
@@ -39,17 +43,17 @@ function insertData(cloneCard,article){
     const newsDetails=cloneCard.querySelector(".news_details");
     const newsDate=cloneCard.querySelector(".news_date");
 
-    newsImg.src=article.urlToImage;
+    newsImg.src=article.image_url;
     newsTitle.innerText=article.title;
     newsDetails.innerText=article.description;
 
-    const date=new Date(article.publishedAt).toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-    newsDate.innerText=`${article.source.name} : ${date}`;
+    const date=new Date(article.pubDate).toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+    newsDate.innerText=`${article.source_id} : ${date}`;
 }
 
 function clickOnCard(cloneCard,article){
     cloneCard.firstElementChild.addEventListener("click",()=>{
-        window.open(article.url,"_blank");
+        window.open(article.link,"_blank");
     })
 }
 
@@ -67,7 +71,7 @@ const searchData=document.querySelector(".search_btn");
 const inputData=document.querySelector(".news_input");
 
 searchData.addEventListener("click",()=>{
-    const query = inputField.value.trim();
+    const query = inputData.value.trim();
     if (query) {
         fetchNews(query);
     }
