@@ -1,7 +1,7 @@
 const apiKey="5ff3376ec3744f19a604958f539cac96";
 const url="https://newsapi.org/v2/everything?q=";
 
-window.addEventListener("load",()=>fetchNews("Humanity"));
+window.addEventListener("DOMContentLoaded",()=>fetchNews("Humanity"));
 
 function reload(){
     window.location.reload();
@@ -74,11 +74,9 @@ const searchData=document.querySelector(".search_btn");
 const inputData=document.querySelector(".news_input");
 
 searchData.addEventListener("click",()=>{
-    if(inputData.value){
-        fetchNews(inputData.value);
-    }
-    else{
-        return;
+    const query = inputField.value.trim();
+    if (query) {
+        fetchNews(query);
     }
 });
 
