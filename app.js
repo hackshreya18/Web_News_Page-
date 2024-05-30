@@ -3,7 +3,7 @@
 
 const url="https://newsdata.io/api/1/news?apikey=pub_45290c4a5b1d1c9e14d145ca383521940131e&q="
 
-window.addEventListener("load",()=>fetchNews("Humanity"));
+window.addEventListener("load",()=>fetchNews("India"));
 
 function reload(){
     window.location.reload();
