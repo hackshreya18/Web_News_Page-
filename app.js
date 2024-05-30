@@ -1,4 +1,4 @@
-const apiKey="5ff3376ec3744f19a604958f539cac96";
+const API_KEY="5ff3376ec3744f19a604958f539cac96";
 const url="https://newsapi.org/v2/everything?q=";
 
 window.addEventListener("DOMContentLoaded",()=>fetchNews("Humanity"));
@@ -9,7 +9,7 @@ function reload(){
 
 async function fetchNews(query){
     try{
-        const res=await fetch(`${url}${query}&apiKey=${apiKey}`);
+        const res=await fetch(`${url}${query}&apiKey=${API_KEY}`);
         if(!res.ok){
             throw new Error('Network response was not ok');
         }
